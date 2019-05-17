@@ -1,33 +1,36 @@
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>dialpad</mat-icon>
-    <span>Redial</span>
+  <button mat-menu-item [routerLink]="['scanphoto']">
+    <mat-icon>photo_camera</mat-icon>
+    <span>ScanPhoto</span>
   </button>
-  <button mat-menu-item>
-    <mat-icon>voicemail</mat-icon>
-    <span>Check voicemail</span>
+  <button mat-menu-item [routerLink]="['scanvideo']">
+    <mat-icon>videocam</mat-icon>
+    <span>ScanVideo</span>
   </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
+  <button mat-menu-item [routerLink]="['manualscan']">
+    <mat-icon>keyboard</mat-icon>
+    <span>ManualScan</span>
   </button>
 </mat-menu>
 
 <nav>
+  <div class="app-title" [routerLink]="['/']">
+    <span>ScanApp</span>
+  </div>
   <div class="mobile" mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </div>
-  <div class="desktop">
-    <mat-icon>dialpad</mat-icon>
-    <span>Redial</span>
+  <div class="desktop" [routerLink]="['scanphoto']">
+      <mat-icon>photo_camera</mat-icon>
+      <span>ScanPhoto</span>
   </div>
-  <div class="desktop">
-    <mat-icon>voicemail</mat-icon>
-    <span>Check voicemail</span>
+  <div class="desktop" [routerLink]="['scanvideo']">
+      <mat-icon>videocam</mat-icon>
+      <span>ScanVideo</span>
   </div>
-  <div class="desktop">
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
+  <div class="desktop" [routerLink]="['manualscan']">
+      <mat-icon>keyboard</mat-icon>
+      <span>ManualScan</span>
   </div>
 </nav>
 
