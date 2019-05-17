@@ -1,12 +1,3 @@
-<!-- <mat-menu #appMenu="matMenu">
-  <button mat-menu-item>Settings</button>
-  <button mat-menu-item>Help</button>
-</mat-menu>
-
-<button mat-icon-button [matMenuTriggerFor]="appMenu">
-  <mat-icon>more_vert</mat-icon>
-</button> -->
-
 <mat-menu #menu="matMenu">
   <button mat-menu-item>
     <mat-icon>dialpad</mat-icon>
@@ -22,6 +13,22 @@
   </button>
 </mat-menu>
 
-<button mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>more_vert</mat-icon>
-</button>
+<nav>
+  <div class="mobile" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </div>
+  <div class="desktop">
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </div>
+  <div class="desktop">
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voicemail</span>
+  </div>
+  <div class="desktop">
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </div>
+</nav>
+
+

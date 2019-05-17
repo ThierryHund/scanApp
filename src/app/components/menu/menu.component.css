@@ -1,0 +1,48 @@
+nav {
+  position: fixed;
+  background-color: indigo;
+  color:  white;
+  width:100%;
+  display:block;
+  top:0;
+  height: 45px;
+}
+
+nav button {
+  color:  white;
+  background-color: indigo;
+}
+
+.desktop {
+  display: none;
+}
+
+.mobile {
+  display: block;
+  height: 45px;
+  line-height: 45px;
+}
+
+@media screen and (min-width: 500px)
+{
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+    line-height: 45px;
+    margin: 0 15px 0 15px;
+  }
+
+  .desktop span {
+    padding-left: 10px;
+  }
+
+}
