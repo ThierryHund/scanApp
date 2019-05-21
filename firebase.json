@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/scann-app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
