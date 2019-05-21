@@ -9,11 +9,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 
+import Quagga from 'quagga';
+import { BarCodeReaderComponent } from './components/bar-code-reader/bar-code-reader.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    BarCodeReaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,6 +26,7 @@ import { MenuComponent } from './components/menu/menu.component';
     MaterialModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

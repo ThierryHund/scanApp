@@ -10,6 +10,11 @@ body {
   vertical-align: middle;
 }
 
+.main {
+  position: relative;
+  top: 45px
+}
+
 /* css to ovveride material default design for menu item */
 .cdk-overlay-pane, .mat-menu-panel {
   width: 100%!important;
@@ -22,5 +27,6 @@ body {
     display: none;
   }
 }
+
 
 
