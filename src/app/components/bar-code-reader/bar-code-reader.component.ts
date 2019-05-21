@@ -15,12 +15,12 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
       name: 'Live',
       type: 'LiveStream',
       target: '#inputBarcode',
-      constraints: {
-        width: { min: 640 },
-        height: { min: 480 },
-        aspectRatio: { min: 1, max: 100 },
-        facingMode: 'environment', // or user
-      },
+      // constraints: {
+      //   width: { min: 640 },
+      //   height: { min: 480 },
+      //   aspectRatio: { min: 1, max: 100 },
+      //   facingMode: 'environment', // or user
+      // },
       singleChannel: false // true: only the red color-channel is read
     },
     locator: {
@@ -93,6 +93,7 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
+    window.addEventListener('resize', this.resize, false);
     this.startScanner();
 
   }
@@ -101,6 +102,15 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
   ngOnInit() {
 
 
+  }
+
+  resize() {
+    let vw = 700 * 0.01;
+    if (window.innerWidth < 700) {
+      vw = window.innerWidth * 0.01;
+    }
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vw', `${vw}px`);
   }
 
 }

@@ -12,7 +12,7 @@ body {
 
 .main {
   position: relative;
-  top: 45px
+  /* top: 45px */
 }
 
 /* css to ovveride material default design for menu item */
@@ -36,3 +36,32 @@ body {
 
 
 
+
+
+
+
+
+
+
+.drawingBuffer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.inputBarcode video, .drawingBuffer {
+  width:100%;
+}
+
+video {
+  width: 100%!important;
+}
+
+.drawingBuffer{
+  /* border: solid 1px blue; */
+  /* width: 100vw;
+  height:100vw; */
+  width: calc(var(--vw, 1vw) * 100);
+  /* max-width: 700px; */
+
+}
