@@ -1,2 +1,7 @@
 <div class="inputBarcode" #inputBarcode id="inputBarcode"></div>
-<div class="resultviewer">{{finalBarcode}}</div>
+<div class="resultviewer">
+  <ul>
+    <li>code bar:{{finalBarcode}}</li>
+    <li><img [src]="productData.imageUrl" alt=""></li>
+    <li>nova groupe: {{productData.novaGroup}}</li>
+  </ul>{{finalBarcode}}</div>
