@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material-module';
 import { AppRoutingModule } from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -25,6 +26,7 @@ import { BarCodeReaderComponent } from './components/bar-code-reader/bar-code-re
     MaterialModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule
 
   ],
   providers: [],

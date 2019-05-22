@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import Quagga from 'quagga';
+import { FoodFactApiService } from 'src/app/services/food-fact-api.service';
 
 @Component({
   selector: 'app-bar-code-reader',
@@ -56,8 +57,8 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit {
     },
   };
   detectionHash = {};
-
-  constructor() { }
+  data: any;
+  constructor(private api: FoodFactApiService) { }
 
   private startScanner() {
     this.barcode = '';
@@ -120,6 +121,13 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit {
   private onSuccess(result) {
     this.finalBarcode = result;
     this.videoTag.nativeElement.children[0].pause();
+
+    this.api.setBarcode(this.finalBarcode);
+
+    this.api.getProductData()
+    .subscribe((data: any) => this.data = {
+        data
+    });
   }
 
   ngAfterViewInit() {
