@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import Quagga from 'quagga';
 
 @Component({
@@ -6,7 +6,9 @@ import Quagga from 'quagga';
   templateUrl: './bar-code-reader.component.html',
   styleUrls: ['./bar-code-reader.component.css']
 })
-export class BarCodeReaderComponent implements OnInit, AfterViewInit{
+export class BarCodeReaderComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('inputBarcode') public videoTag: ElementRef;
 
   //config to double check
   barcode = '';
@@ -108,13 +110,16 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
     }
     if (this.detectionHash[result.codeResult.code] >= 5) {
       this.detectionHash = {};
-      Quagga.stop();
+      // Quagga.stop();
+      console.log(Quagga)
+      // Quagga.pause();
       this.onSuccess(result.codeResult.code);
     }
   }
 
   private onSuccess(result) {
     this.finalBarcode = result;
+    this.videoTag.nativeElement.children[0].pause();
   }
 
   ngAfterViewInit() {
