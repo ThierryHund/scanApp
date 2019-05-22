@@ -34,15 +34,6 @@ body {
   }
 }
 
-
-
-
-
-
-
-
-
-
 .drawingBuffer {
   position: absolute;
   top: 0;
@@ -53,9 +44,9 @@ body {
   width:100%;
 }
 
-video {
+/* video {
   width: 100%!important;
-}
+} */
 
 .drawingBuffer{
   /* border: solid 1px blue; */

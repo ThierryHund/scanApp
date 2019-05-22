@@ -10,6 +10,7 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
 
   //config to double check
   barcode = '';
+  finalBarcode = '';
   configQuagga = {
     inputStream: {
       name: 'Live',
@@ -23,6 +24,7 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
       // },
       singleChannel: false // true: only the red color-channel is read
     },
+    frequency: 20,
     locator: {
       patchSize: 'medium',
       halfSample: true
@@ -36,17 +38,42 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
       drawBoundingBox: true,
       showFrequency: true,
       drawScanline: true,
-      showPattern: true
-  },
+      showPattern: true,
+      showCanvas: true,
+      showPatches: true,
+      showFoundPatches: true,
+      showSkeleton: true,
+      showLabels: true,
+      showPatchLabels: true,
+      showRemainingPatchLabels: true,
+      boxFromPatches: {
+          showTransformed: true,
+          showTransformedBox: true,
+          showBB: true
+      }
+    },
   };
+  detectionHash = {};
 
   constructor() { }
+
+  private startScanner() {
+    this.barcode = '';
+    Quagga.onProcessed((result: any) => this.onProcessed(result));
+    Quagga.onDetected((result: any) => this.onDetected(result));
+    Quagga.init(this.configQuagga, (err) => {
+      if (err) {
+        return console.log(err);
+      }
+      Quagga.start();
+      console.log('Barcode: initialization finished. Ready to start');
+    });
+  }
 
   private onProcessed(result: any) {
     const drawingCtx = Quagga.canvas.ctx.overlay;
     const drawingCanvas = Quagga.canvas.dom.overlay;
     // drawingCanvas.style.display = 'none';
-
     if (result) {
       if (result.boxes) {
         drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute('width'), 10), parseInt(drawingCanvas.getAttribute('height'), 10));
@@ -67,49 +94,40 @@ export class BarCodeReaderComponent implements OnInit, AfterViewInit{
     }
   }
 
-  startScanner() {
-    this.barcode = '';
-
-    Quagga.onProcessed((result: any) => this.onProcessed(result));
-
-    Quagga.onDetected((result: any) => this.logCode(result));
-
-    Quagga.init(this.configQuagga, (err) => {
-      if (err) {
-        return console.log(err);
-      }
-      Quagga.start();
-      console.log('Barcode: initialization finished. Ready to start');
-    });
-  }
-
-  private logCode(result) {
+  private onDetected(result) {
     const code = result.codeResult.code;
     if (this.barcode !== code) {
       this.barcode = 'Code-barres EAN : ' + code;
       console.log(this.barcode);
-      Quagga.stop();
     }
+
+    if (typeof this.detectionHash[result.codeResult.code] === 'undefined') {
+      this.detectionHash[result.codeResult.code] = 1;
+    } else {
+      this.detectionHash[result.codeResult.code]++;
+    }
+    if (this.detectionHash[result.codeResult.code] >= 5) {
+      this.detectionHash = {};
+      Quagga.stop();
+      this.onSuccess(result.codeResult.code);
+    }
+  }
+
+  private onSuccess(result) {
+    this.finalBarcode = result;
   }
 
   ngAfterViewInit() {
     window.addEventListener('resize', this.resize, false);
     this.startScanner();
-
   }
 
-
   ngOnInit() {
-
-
   }
 
   resize() {
-    let vw = 700 * 0.01;
-    if (window.innerWidth < 700) {
-      vw = window.innerWidth * 0.01;
-    }
-    // Then we set the value in the --vh custom property to the root of the document
+    const vw = document.documentElement.clientWidth * 0.01;
+    // Then we set the value in the --vw custom property to the root of the document
     document.documentElement.style.setProperty('--vw', `${vw}px`);
   }
 
